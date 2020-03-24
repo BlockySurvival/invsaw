@@ -97,7 +97,9 @@ invsaw.allow_put = function(inv, listname, index, stack, player)
 		local incost = (incount * 8) + microstack:get_count()
 		local maxcost = (stackmax * 8) + 7
 		local cost = circular_saw:get_cost(inv, stackname)
-		if (incost + cost) > maxcost then
+		if not cost or cost == 0 then
+			return 0
+		elseif (incost + cost) > maxcost then
 			return math.max((maxcost - incost) / cost, 0)
 		end
 		return count
